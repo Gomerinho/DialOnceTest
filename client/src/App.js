@@ -26,9 +26,9 @@ function App() {
   //Fonction qui permet de rendre chaque un item parmis les urls du state
   const renderUrl = url => {
     return (
-      <li key={url._id || Date.now()} className='list__item product'>
+      <li key={url._id} className='list__item product'>
         <Card>
-          <a href={url.url}>
+          <a href={url.url} target='_blank' rel='noopener noreferrer'>
             <h3 className='url__name'>{url.name}</h3>
           </a>
         </Card>
