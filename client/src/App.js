@@ -88,7 +88,7 @@ function App() {
           urls.map(url => renderUrl(url))
         ) : (
           <Card>
-            <p>No products found</p>
+            <p>Pas d'urls trouvé</p>
           </Card>
         )}
       </ul>
