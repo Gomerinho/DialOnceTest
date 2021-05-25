@@ -6,22 +6,24 @@ import getAllUrl from './services/urlService';
 import Card from './components/UI/Card';
 
 function App() {
+  //Définition des states
   const [urls, setUrls] = useState(false);
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
 
+  //Permet d'initialiser les urls stocker dans l'api
   useEffect(() => {
     if (!urls) {
       getUrls();
     }
-  }, []);
+  }, [urls]);
 
   const getUrls = async () => {
     let res = await getAllUrl();
-    console.log(res);
     setUrls(res);
   };
 
+  //Fonction qui permet de rendre chaque un item parmis les urls du state
   const renderUrl = url => {
     return (
       <li key={url._id || Date.now()} className='list__item product'>
@@ -34,20 +36,28 @@ function App() {
     );
   };
 
+  //Fonction qui permet de changer l'état du nom
+
   const handleNameChange = event => {
     setName(event.target.value);
   };
+
+  //Fonction qui permet de changer l'état de l'url
   const handleUrlChange = event => {
     setUrl(event.target.value);
   };
 
+  //Fonction qui permet de créer un nouveau lien
+
   const handleSubmit = async event => {
     event.preventDefault();
 
+    if (url.trim() === '' && name.trim() === '') {
+      return;
+    }
     const data = { _id: String(new Date().getTime()), name: name, url: url };
     const json = JSON.stringify({ name: name, url: url });
-    console.log(json);
-
+    //Envoi des données à l'api
     await fetch('http://localhost:5000/api/url', {
       method: 'POST',
       headers: {
@@ -55,9 +65,13 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: json,
-    }).then(response => console.log(response));
+    });
+
+    //Changement des states
     setUrls(prevState => [data, ...prevState]);
-    console.log(urls);
+    //Reset de nom et url
+    setName('');
+    setUrl('');
   };
 
   return (
@@ -66,6 +80,8 @@ function App() {
         handleSubmit={handleSubmit}
         handleNameChange={handleNameChange}
         handleUrlChange={handleUrlChange}
+        name={name}
+        url={url}
       />
       <ul className='list'>
         {urls && urls.length > 0 ? (

@@ -1,8 +1,7 @@
 import axios from 'axios';
-
+//Récupération des urls depuis l'api
 const getAllUrl = async () => {
   let res = await axios.get(`/api/url`);
-  console.log(res.data);
   return res.data || [];
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 
-import classes from './UrlForm.module.css';
+import './UrlForm.module.css';
 
 const UrlForm = props => {
   return (
@@ -13,6 +13,7 @@ const UrlForm = props => {
           type='text'
           name='name'
           id='name'
+          value={props.name}
           onChange={props.handleNameChange}
         />
         <label htmlFor='url'>Entrez une url : </label>
@@ -20,6 +21,7 @@ const UrlForm = props => {
           type='text'
           name='url'
           id='url'
+          value={props.url}
           onChange={props.handleUrlChange}
         />
         <Button type='submit'>Submit</Button>
