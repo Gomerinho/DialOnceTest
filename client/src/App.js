@@ -52,23 +52,24 @@ function App() {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (url.trim() === '' && name.trim() === '') {
+    if (url.trim() === '' || name.trim() === '') {
       return;
     }
-    const data = { _id: String(new Date().getTime()), name: name, url: url };
     const json = JSON.stringify({ name: name, url: url });
     //Envoi des données à l'api
-    await fetch('http://localhost:5000/api/url', {
+    const newUrl = await fetch('http://localhost:5000/api/url', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: json,
-    });
+    }).then(response => response.json());
+
+    console.log(newUrl);
 
     //Changement des states
-    setUrls(prevState => [data, ...prevState]);
+    setUrls(prevState => [newUrl.url, ...prevState]);
     //Reset de nom et url
     setName('');
     setUrl('');
