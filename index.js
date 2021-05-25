@@ -5,22 +5,26 @@ const Url = require('./models/Url');
 
 const app = express();
 
+//Connection à la base de donnée
 mongoose.connect('mongodb://localhost:27017/dial-once-test', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
 });
 
+//Vérification de la connexion
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error :'));
 db.once('open', () => {
   console.log('Database connected');
 });
 
+//Toutes les envoie et requêtes des api se fait sous format JSON
 app.use(express.json());
 
+//Permet de réaliser les requêtes fetch
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.ORIGIN || '*');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -38,10 +42,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 require('./routes/urlRoutes')(app);
-
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
 
 const PORT = 5000;
 app.listen(PORT, () => {
