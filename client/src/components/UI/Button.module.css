@@ -1,0 +1,27 @@
+button {
+  display: block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 1rem 0 0 auto;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+}
+
+button:hover,
+button:focus {
+  background: #0053ba;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}

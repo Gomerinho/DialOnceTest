@@ -3,7 +3,7 @@ const Url = mongoose.model('urls');
 
 module.exports = app => {
   app.get(`/api/url`, async (req, res) => {
-    let urls = await Url.find();
+    let urls = await Url.find().sort({ _id: -1 });
     return res.status(200).send(urls);
   });
 

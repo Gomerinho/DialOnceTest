@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import UrlForm from './components/UrlForm/UrlForm';
 
 import getAllUrl from './services/urlService';
+import Card from './components/UI/Card';
 
 function App() {
   const [urls, setUrls] = useState(false);
@@ -24,9 +25,11 @@ function App() {
   const renderUrl = url => {
     return (
       <li key={url._id || Date.now()} className='list__item product'>
-        <a href={url.url}>
-          <h3 className='url__name'>{url.name}</h3>
-        </a>
+        <Card>
+          <a href={url.url}>
+            <h3 className='url__name'>{url.name}</h3>
+          </a>
+        </Card>
       </li>
     );
   };
@@ -53,24 +56,25 @@ function App() {
       },
       body: json,
     }).then(response => console.log(response));
-    setUrls(prevState => [...prevState, data]);
+    setUrls(prevState => [data, ...prevState]);
     console.log(urls);
   };
 
   return (
     <div className='App'>
+      <UrlForm
+        handleSubmit={handleSubmit}
+        handleNameChange={handleNameChange}
+        handleUrlChange={handleUrlChange}
+      />
       <ul className='list'>
-        {urls.length > 0 ? (
+        {urls && urls.length > 0 ? (
           urls.map(url => renderUrl(url))
         ) : (
-          <p>No products found</p>
+          <Card>
+            <p>No products found</p>
+          </Card>
         )}
-
-        <form onSubmit={handleSubmit}>
-          <input type='text' name='name' onChange={handleNameChange} />
-          <input type='text' name='url' onChange={handleUrlChange} />
-          <button type='submit'>Submit</button>
-        </form>
       </ul>
     </div>
   );
