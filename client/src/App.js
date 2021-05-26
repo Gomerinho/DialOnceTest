@@ -7,20 +7,20 @@ import Card from './components/UI/Card';
 
 function App() {
   //Définition des states
-  const [urls, setUrls] = useState(false);
+  const [urlList, setUrlList] = useState(false);
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
 
   //Permet d'initialiser les urls stocker dans l'api
   useEffect(() => {
-    if (!urls) {
+    if (!urlList) {
       getUrls();
     }
-  }, [urls]);
+  }, [urlList]);
 
   const getUrls = async () => {
     let res = await getAllUrl();
-    setUrls(res);
+    setUrlList(res);
   };
 
   //Fonction qui permet de rendre chaque un item parmis les urls du state
@@ -69,7 +69,7 @@ function App() {
     console.log(newUrl);
 
     //Changement des states
-    setUrls(prevState => [newUrl.url, ...prevState]);
+    setUrlList(prevState => [newUrl.url, ...prevState]);
     //Reset de nom et url
     setName('');
     setUrl('');
@@ -85,8 +85,8 @@ function App() {
         url={url}
       />
       <ul className='list'>
-        {urls && urls.length > 0 ? (
-          urls.map(url => renderUrl(url))
+        {urlList && urlList.length > 0 ? (
+          urlList.map(url => renderUrl(url))
         ) : (
           <Card>
             <p>Aucun url disponible</p>
