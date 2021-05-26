@@ -19,7 +19,7 @@ db.once('open', () => {
   console.log('Database connected');
 });
 
-//Toutes les envoie et requêtes des api se fait sous format JSON
+//Toutes les requêtes des api se font sous format JSON
 app.use(express.json());
 
 //Permet de réaliser les requêtes fetch
