@@ -6,4 +6,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Penser à faire un "npm install" à la racine mais aussi dans le dosser "client".
 
-A la racine lancer "npm run dev"
+A la racine lancer "npm run dev", le server et le client devrait se lancer en même temps.
