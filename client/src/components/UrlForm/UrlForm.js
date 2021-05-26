@@ -24,7 +24,7 @@ const UrlForm = props => {
           value={props.url}
           onChange={props.handleUrlChange}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type='submit'>ENVOYER</Button>
       </form>
     </Card>
   );
